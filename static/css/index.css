@@ -1,0 +1,108 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+:root {
+    --clr-primary: #7380EC;
+    --clr-danger: #ff7782;
+    --clr-success: #41F1B6;
+    --clr-white: #fff;
+    --clr-info-dark: #7D8DA1;
+    --clr-info-light: #dce1eb;
+    --clr-dark: #363949;
+    --clr-warning: #ff4edc;
+    --clr-light: rgba(132, 139, 200, .18);
+    --clr-primary-variant: #111e88;
+    --clr-dark-variant: #677483;
+    --clr-color-bacground: #f6f6f9;
+
+    --card-border-raduis: 2rem;
+    --border-raduis-1: .4rem;
+    --border-raduis-2: .8rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+    --box-shadow: 0 2rem 3rem var(--clr-light);
+}
+
+body {
+    background-color: var(--clr-color-bacground);
+}
+
+.wrapper {
+    width: 350px;
+    padding: 2rem 1rem;
+    margin: 50px auto;
+    background-color: var(--clr-white);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 20px 35px var(--clr-info-light);
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--clr-dark);
+    margin-bottom: 1.2rem;
+}
+
+form input, form textarea {
+    width: 92%;
+    outline: none;
+    border: 0;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    background-color: var(--clr-info-light);
+}
+
+form input:focus, form textarea:focus {
+    border: 2px solid var(--clr-primary);
+}
+
+button {
+    font-size: 1rem;
+    margin-top: 1.8rem;
+    padding: 10px 0px;
+    border-radius: 20px;
+    outline: none;
+    border: 0;
+    width: 90%;
+    color: var(--clr-white);
+    background-color: var(--clr-dark-variant);
+    cursor: pointer;
+    transition: all .4s ease;
+}
+
+button:hover {
+    background-color: var(--clr-primary);
+}
+
+.member {
+    font-size: 0.8rem;
+    margin-top: 1.4rem;
+    color: var(--clr-dark);
+}
+
+.member a {
+    color: var(--clr-primary);
+    text-decoration: none;
+}
+
+.recover {
+    text-align: right;
+    font-size: 0.8rem;
+    margin: 0.3rem 1.4rem 0 0;
+}
+
+.recover a {
+    text-decoration: none;
+    color: var(--clr-primary);
+}
+
+.msg {
+    font-size: 1rem;
+    color: var(--clr-danger);
+}

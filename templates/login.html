@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+    <form method="post" class="wrapper">
+        <h1>Sign Up</h1>
+        <div>
+            <p class="msg">{{ message }}</p>
+            <input type="email" placeholder="Email" name="email" required value=""><br>
+            <input type="password" name="password" placeholder="password" required><br>
+        </div>
+        <div class="recover">
+            <a href="">Forget Password?</a>
+        </div>
+        <button type="submit">Login</button>
+        <div class="member">
+            Not a member? <a href="/login">Sign up here</a>
+        </div>
+    </form>
+
+{% endblock body %}

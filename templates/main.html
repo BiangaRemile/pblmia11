@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="pincipal">
+        <nav>
+            <h1>Logo</h1>
+            <div class="liste">
+                <select name="store" id="store">
+                    {% for store in stores %}
+                        {% if store_id == store.id %}
+                            <option value="{{ store.id }}" selected><a href="/login">{{ store.name }}</a></option>
+                        {% else %}
+                            <option value="{{ store.id }}"><a href="/login">{{ store.name }}</a></option>
+                        {% endif %}
+                        
+                    {% endfor %}
+                </select>
+                <BUtton id='add-store'>Add store</BUtton>
+                <a href="">Profile</a>
+            </div>
+            <a href="/logout">Log out</a>
+        </nav>
+        <div class="container">
+            <!-- aside section start -->
+            <aside>
+                <div class="top">
+                    <div class="logo">
+                        <h2>Manager</h2>
+                    </div>
+                    <div id="close">
+                        <span>X</span>
+                    </div>
+                </div>
+                <div class="sidebar" id="sidebar">
+                    <a href="#dashboard" class="item active">
+                        <span>GD</span>
+                        <h3>Dashboard</h3>
+                    </a>
+                    <a href="#products" class="item">
+                        <span>AD</span>
+                        <h3>My Stock</h3>
+                    </a>
+                    <a href="#historique" class="item">
+                        <span>HS</span>
+                        <h3>Historique</h3>
+                    </a>
+                    <a id="mofify-store">
+                        <span>PR</span>
+                        <h3>Profile</h3>
+                    </a>
+                    <a id='add-product'>
+                        <span>+</span>
+                        <H3>Add product</H3>
+                    </a>
+                </div>
+            </aside>
+            <!-- aside section end -->
+
+
+            <!-- main section start -->
+            <main>
+                <!-- DashBoard -->
+                <section id="dashboard">
+                    <div class="top">
+                        <h2>Dashboard</h2>
+                        <div class="right">
+                            <button id="menu-bar"><span>M</span></button>
+                            <div class="theme-toggle">
+                                <span class="active">L</span>
+                                <span>D</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insights">
+                        <!-- start sales -->
+                        <div class="sales">
+                            <div class="box">
+                                <h3>My Stock</h3>
+                                <div id="prices-total"></div>
+                                
+                                <!-- <small>Estimation: <span>20%</span></small> -->
+                            </div>
+                        </div>
+                        <!-- end sales -->
+                        <!-- start expenses -->
+                        <div class="expenses">
+                            <div class="box">
+                                <h3>Quantity Used</h3>
+                                <div id="prices-use"></div>
+                            </div>
+                        </div>
+                        <!-- end expenses -->
+                        <!-- start income -->
+                        <div class="income">
+                            <div class="box">
+                                <h3>Quantity Add</h3>
+                                <div id="prices-add"></div>
+                            </div>
+                        </div>
+                        <!-- end income -->
+                    </div>
+                </section>
+                <!-- DashBoard -->
+
+                <!-- Products -->
+                <section id="products" class="block-section">
+                    <div class="top">
+                        <h2>My Stock</h2>
+                    </div>
+                    <div class="table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Stock Quantity</th>
+                                    <th>Price estimation</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+                <!-- Products -->
+
+                <!-- Historique -->
+                <section id="historique" class="block-section">
+                    <div class="top">
+                        <h2>Historique</h2>
+                    </div>
+                    <div class="table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>operation</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+                <!-- Historique -->
+            </main>
+            <!-- main section end -->
+        </div>
+
+        <!-- add store -->
+        <div class="popup add-store">
+            <form name="add-store">
+                <h1>New Store</h1>
+                <div>
+                    <input type="number" value="{{ id_user }}" hidden name='id_user'>
+                    <input type="text" placeholder="Store name" name="name" required><br>
+                    <textarea id="store_adress"cols="35" rows="5" placeholder="Adress" name="adress"></textarea>
+                    <input type="text" name="devise" list="add-store-devises" placeholder="Monnaie principale">
+                    <datalist id="add-store-devises">
+                        <option value="CDF">
+                        <option value="$">Dollars
+                        <option value="FCFA">
+                        <option value="£">Euro
+                    </datalist>
+                </div>
+                <div class="btn">
+                    <button type="submit" class="sub">Save</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!-- add store -->
+
+        <!-- modifiy store -->
+        <div class="popup modify-store">
+            <form name="modify-store">
+                <h1>Store </h1>
+                <div>
+                    <input type="text" placeholder="Store name" name="name" required><br>
+                    <textarea id="store_adress"cols="35" rows="5" placeholder="Adress" name="adress"></textarea>
+                    <input type="text" name="devise" list="modify-store-devises" placeholder="Monnaie">
+                    <datalist id="modify-store-devises">
+                        <option value="CDF">
+                        <option value="$">Dollars
+                        <option value="FCFA">
+                        <option value="£">Euro
+                    </datalist>
+                </div>
+                <div class="btn">
+                    <button type="submit" class="sub">Save</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!-- modifiy store -->
+
+        <!-- add product -->
+        <div class="popup add-product">
+            <form name="add-product">
+                <h1>New Product</h1>
+                <div>
+                    <input type="text" placeholder="Product name" name="product_name" required><br>
+                    <input type="number" placeholder="Quantity" name="quantity" required><br>
+                    <input type="text" name="unit" list="add-product-unit" placeholder="Unité">
+                    <datalist id="add-product-unit">
+                        <option value="pq" >Paquet
+                        <option value="kg">Kilogramme
+                        <option value="sac">
+                    </datalist>
+                    <input type="number" placeholder="Unite price" name="price" required><br>
+                    <input type="text" name="devise" list="add-product-devises" placeholder="Monnaie">
+                    <datalist id="add-product-devises">
+                        <option value="CDF">
+                        <option value="$">Dollars
+                        <option value="FCFA">
+                        <option value="£">Euro
+                    </datalist>
+                </div>
+                <div class="btn">
+                    <button type="submit" class="sub">Save</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!-- add product -->
+
+        <!-- Product operation -->
+        <div class="popup details">
+            <form name="details">
+                <h1>New Product</h1>
+                <div>
+                    <label for="">Stock quantity</label>
+                    <input type="text" value="Stock quantity:" name="stock_quantity" readonly><br>
+                    <label for="">Unit price</label>
+                    <input type="text" value="Unit price:" name="unit" readonly><br>
+                    <label for="">Quantity</label>
+                    <input type="number" name="quantity" required><br>
+                </div>
+                <div class="btn">
+                    <button type="submit" class="add">Add</button>
+                    <button type="submit" class="use">Use</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Product operation -->
+    
+    <!-- Modify Product -->
+    <div class="popup modify-product">
+            <form name="modify-product">
+                <h1>Product</h1>
+                <div>
+                    <input type="text" placeholder="Product name" name="product_name" required><br>
+                    <input type="number" placeholder="Quantity" name="quantity" required><br>
+                    <input type="text" name="unit" list="modifiy-product-unit" placeholder="Unité">
+                    <datalist id="modifiy-product-unit">
+                        <option value="pq" >Paquet
+                        <option value="kg">Kilogramme
+                        <option value="sac">
+                    </datalist>
+                    <input type="number" placeholder="Unite price" name="price" required><br>
+                    <input type="text" name="devise" list="modifiy-product-devises" placeholder="Monnaie">
+                    <datalist id="modifiy-product-devises">
+                        <option value="CDF">
+                        <option value="$">Dollars
+                        <option value="FCFA">
+                        <option value="£">Euro
+                    </datalist>
+                    
+                </div>
+                <div class="btn">
+                    <button type="submit" class="del use">Delete</button>
+                    <button type="submit" class="save sub">Save</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!-- Modify product -->
+
+    <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
+
+</body>
+</html>
