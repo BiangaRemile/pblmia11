@@ -69,16 +69,19 @@ def index():
         user = User(name=name, email=email, adress=adress, password=password, master=True)
 
         if password == confirmation:
-            db.session.add(user)
-            db.session.commit()
+            try:
+                db.session.add(user)
+                db.session.commit()
 
-            new_user = User.query.filter_by(email=user.email, password=user.password).first()
-            store = Store(adress=user.adress, name="My store", id_user = new_user.id)
+                new_user = User.query.filter_by(email=user.email, password=user.password).first()
+                store = Store(adress=user.adress, name="My store", id_user = new_user.id)
 
-            db.session.add(store)
-            db.session.commit()
+                db.session.add(store)
+                db.session.commit()
+                return redirect('/')
 
-            return redirect('/')
+            except:
+                msg = "Email déjà utilisé"   
                 
        
     return render_template('signup.html', name=name, email=email, adress=adress, password=password, message=msg)
