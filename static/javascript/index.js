@@ -62,7 +62,7 @@ addStoreBox.querySelector('.sub').addEventListener('click', () => {
         type: 'POST',
         url: '/save/store',
         success: function(response) {
-            console.log(response);
+            location.reload()
         },
         error: function (error) {
             console.log(error)
@@ -151,7 +151,7 @@ addProductBox.querySelector('.sub').addEventListener('click', () => {
         type: 'POST',
         url: '/save/product',
         success: function(response) {
-            console.log(response);
+            location.reload()
         },
         error: function (error) {
             console.log(error)
